@@ -7,6 +7,12 @@ void gotoxy(SHORT x, SHORT y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
+void setConsoleSize(int x, int y) {
+	char command[100];
+	sprintf(command, "mode con lines=%d cols=%d", y, x);
+	system(command);
+}
+
 void CursorView() {
 	CONSOLE_CURSOR_INFO cursor;
 	cursor.dwSize = 1;			//Ä¿¼­ ±½±â
@@ -14,8 +20,3 @@ void CursorView() {
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
 
-void setConsoleSize(int x, int y) {
-	char command[100];
-	sprintf(command, "mode con lines=%d cols=%d", y, x);
-	system(command);
-}
