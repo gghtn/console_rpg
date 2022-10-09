@@ -9,10 +9,9 @@ public:
 	CGame(CUser& other) : user(other), stage(0) {};
 
 	void gameStart();
+	void battleStart();
 
 	void battlePrint(CMonster monster);
 
 	void menuPrint();
-
-	void battleStart();
 };

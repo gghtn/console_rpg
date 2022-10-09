@@ -26,7 +26,15 @@ void CGame::gameStart() {
 		cout << "¢º";
 		int key = _getch();
 		if (key == ENTER) {
-
+			switch (y) {
+			case 5:
+				battleStart();
+				break;
+			case 9:
+			case 11:
+			default:
+				break;
+			}
 		}
 
 	}
