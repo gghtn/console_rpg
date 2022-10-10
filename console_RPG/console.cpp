@@ -13,10 +13,10 @@ void setConsoleSize(int x, int y) {
 	system(command);
 }
 
-void CursorView() {
+void CursorView(bool is_visible) {
 	CONSOLE_CURSOR_INFO cursor;
 	cursor.dwSize = 1;			//커서 굵기
-	cursor.bVisible = FALSE;	//커서 visible
+	cursor.bVisible = is_visible;	//커서 visible
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
 

@@ -8,4 +8,4 @@ void gotoxy(SHORT x, SHORT y);
 void setConsoleSize(int x, int y);
 
 //커서설정
-void CursorView();
+void CursorView(bool);
