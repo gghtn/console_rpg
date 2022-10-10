@@ -8,7 +8,7 @@ class CUser {
 	int level, max_hp, u_attack, u_defense, point;
 	//현재 경험치, 경험치 총량,
 	int exp, max_exp;
-	int max_stage;
+	int max_stage, total_kill;
 	int u_hp;
 	bool user_live;
 
@@ -26,6 +26,7 @@ public:
 	int getPoint() { return point; };
 	int getExp() { return exp; };
 	int getStage() { return max_stage; };
+	int getTotalKill() { return total_kill; };
 	//set
 	void setExp(int num);
 	void setStage(int num) { max_stage = num; };
@@ -35,6 +36,7 @@ public:
 	void setMaxHp() { max_hp++; };
 	void setDefense() { u_defense++; };
 	void setPoint() { point--; };
+	void setTotalKill(int num) { total_kill += num; };
 
 	//유저 회복
 	void userRecovery();

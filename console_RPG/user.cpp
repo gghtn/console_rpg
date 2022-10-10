@@ -15,6 +15,7 @@ CUser::CUser(const char* name, int* arr) : user_live(true) {
 	exp = *(arr + 5);
 	max_exp = *(arr + 6);
 	max_stage = *(arr + 7);
+	total_kill = *(arr + 8);
 	u_hp = max_hp;
 }
 
