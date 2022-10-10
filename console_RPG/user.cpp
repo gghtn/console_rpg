@@ -4,17 +4,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-CUser::CUser(const char* name) : user_live(true) {
-	user_name = new char[strlen(name) + 1];
+CUser::CUser(const char* name, int* arr) : user_live(true) {
 	strcpy_s(user_name, strlen(name) + 1, name);
 
-	srand((unsigned)time(NULL));
-	level = 1;
+	level = *(arr);
+	max_hp = *(arr + 1);
+	u_attack = *(arr + 2);
+	u_defense = *(arr + 3);
+	point = *(arr + 4);
+	exp = *(arr + 5);
+	max_exp = *(arr + 6);
+	max_stage = *(arr + 7);
 	u_hp = max_hp;
-	u_attack = rand() % 10 + 10;
-	u_defense = rand() % 10 + 10;
-	point = 0;
-	exp = 0;
 }
 
 void CUser::setExp(int num) {
@@ -28,11 +29,6 @@ void CUser::setExp(int num) {
 void CUser::userRecovery() {
 	u_hp += (max_hp / 10) * 2;
 	if (u_hp > max_hp) u_hp = max_hp;
-}
-
-void CUser::setAttack() {
-	srand((unsigned)time(NULL));
-	u_attack = rand() % 10 + 10;
 }
 
 void CUser::printUser() {
@@ -59,6 +55,5 @@ void CUser::userDamaged(int damage) {
 void CUser::levelUp() {
 	level++, max_hp++, u_attack++, u_defense++;
 	point += 5;
-	exp = 0;
 	max_exp += max_exp / 10;
 }
