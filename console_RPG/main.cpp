@@ -8,7 +8,7 @@ using namespace std;
 
 #define YES 121
 char name[12];
-int save_arr[8]={1, 100, 15, 15, 0, 0, 100, 1}; //level, maxHP, ATK, DEF, point, exp, maxExp, maxStage
+int save_arr[9]={1, 100, 15, 15, 0, 0, 100, 1, 0}; //level, maxHP, ATK, DEF, point, exp, maxExp, maxStage, totalKill
 
 int main() {
 	memset(name, '\0', 10);
@@ -28,7 +28,7 @@ int main() {
 		gotoxy(3, 10);
 		if (ch == YES) {
 			fread(name, sizeof(char), 12, in);
-			fread(save_arr, sizeof(int), 8, in);
+			fread(save_arr, sizeof(int), 9, in);
 
 			cout << "이전 정보를 로드했습니다.";
 			Sleep(500);
