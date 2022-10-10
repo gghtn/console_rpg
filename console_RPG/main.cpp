@@ -3,26 +3,48 @@
 #include "game.h"
 #include "user.h"
 #include "console.h"
+#pragma warning(disable:4996)
 using namespace std;
 
+#define YES 121
+char name[12];
+int save_arr[8]={1, 100, 15, 15, 0, 0, 100, 1}; //level, maxHP, ATK, DEF, point, exp, maxExp, maxStage
+
 int main() {
-	setConsoleSize(30, 20);
-	CursorView();
+	memset(name, '\0', 10);
+	FILE* in;
+	in = fopen("savedata.bin", "rb");
+	if (!in) {
+		gotoxy(3, 10);
+		cout << "캐릭터 이름을 설정하시오: ";
+		cin >> name;
+	}
+	else {
+		gotoxy(3, 10);
+		cout << "이전 정보를 로드하시겠습니까?(Y/N) ";
+		char ch;
+		cin >> ch;
+		system("cls");
+		gotoxy(3, 10);
+		if (ch == YES) {
+			fread(name, sizeof(char), 12, in);
+			fread(save_arr, sizeof(int), 8, in);
 
-	//char name[10];
-	//cin >> name;
+			cout << "이전 정보를 로드했습니다.";
+			Sleep(500);
+		}
+		else {
+			cout << "캐릭터 이름을 설정하시오: ";
+			cin >> name;
+		}
+		fclose(in);
+	}
 
-	CUser hero("Dsf");
+	CUser hero(name, save_arr);
 
 	CGame _new(hero);
 
 	_new.gameStart();
-
-	//_new.battleStart();
-
-	//hero.printUser();
-
-
 
 	return 0;
 }
