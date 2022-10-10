@@ -13,10 +13,8 @@ public:
 	//몬스터의 생사여부
 	bool isMonster() { return monster_live; };
 
-	//몬스터의 hp가져오기
+	//몬스터 get
 	int getMonsterHp() { return m_hp; };
-
-	//몬스터 공격력 가져오기
 	int getMonsterAttack() { return rand() % m_attack + 5; };
 
 	//몬스터가 공격받을 때

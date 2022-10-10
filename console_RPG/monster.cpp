@@ -12,6 +12,7 @@ CMonster::CMonster() : monster_live(true) {
 	m_attack = rand() % 10 + 10;
 }
 
+
 void CMonster::monsterDamaged(int damage) {
 	m_hp -= damage;
 	if (m_hp <= 0) {
