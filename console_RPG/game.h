@@ -3,10 +3,10 @@
 #include "monster.h"
 
 class CGame {
-	int stage;
+	int stage, monster_kill;
 	CUser& user;
 public:
-	CGame(CUser& other) : user(other), stage(0){};
+	CGame(CUser& other) : user(other), stage(0), monster_kill(0){};
 
 	void gameStart();
 	void battleStart();

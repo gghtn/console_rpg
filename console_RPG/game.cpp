@@ -79,12 +79,13 @@ void CGame::gameStart() {
 	}
 	system("cls");
 	cout << "게임 종료";
+	user.setTotalKill(monster_kill);	//게임 종료시 총 처치수 set
 	saveData();	//게임 종료시 데이터 저장
 }
 
 void CGame::battleStart() {
 	setConsoleSize(75, 40);
-	int total_exp = 0, key, num, damage, stack;	//총 획득 exp, 입력 키, 키를 저장할 변수, 데미지, 스택
+	int total_exp = 0, key, num, damage, stack;	//총 획득 exp, 입력 키, 키를 저장할 변수, 데미지, 스택, 처치 수
 	stage = 0, user.setHP(), user.setLive();	//스테이지, 유저 hp, 유저 생존여부 초기화
 	while (user.isUser()) {	// 1
 		CMonster monster;	//몬스터 생성
@@ -100,6 +101,7 @@ void CGame::battleStart() {
 			if (key == ESC) break;
 			num = key;
 
+			//유저 턴(공격, 회복, 턴 넘기기)
 			switch (num) {
 			case ATTACK:
 				system("cls");
@@ -152,6 +154,7 @@ void CGame::battleStart() {
 				continue;
 			}
 
+			//몬스터 턴
 			if (monster.isMonster()) {
 				damage = 5 + rand() % monster.getMonsterAttack() + (stage / 10) * 5; //10스테이지마다 적 공격력 증가
 				user.userDamaged(damage);
@@ -166,8 +169,8 @@ void CGame::battleStart() {
 				}
 				Sleep(1000);
 			}
-
 		}	//2
+		monster_kill = monster.death_count; //총 처치 수
 		if (key == ESC) break;
 	}	//1
 
@@ -180,8 +183,8 @@ void CGame::battleStart() {
 	system("cls");
 
 	memset(exit_print, '\0', 100);
-	sprintf(exit_print, "최대 도달 %d층.현재 도달 %d층.처치 몬스터 %d.총 획득 exp %d",
-		user.getStage(), stage, stage - 1, total_exp);
+	sprintf(exit_print, "최대 도달 %d층.현재 도달 %d층.처치 몬스터 %d.총 획득 exp %d.총 처치 몬스터 %d",
+		user.getStage(), stage, stage-1, total_exp, user.getTotalKill() + monster_kill);
 
 	gotoxy(25, j);
 	for (unsigned int i = 0; i < strlen(exit_print); i++) {
@@ -214,7 +217,7 @@ void CGame::battlePrint(CMonster monster) {
 	gotoxy(3, 5);
 	cout << "■ 처치 몬스터 : ";
 	cout.width(13);
-	cout << left << CMonster::death_count << "■";
+	cout << left << stage - 1 << "■";
 	gotoxy(3, 6);
 	cout << "■                            ■";
 	gotoxy(3, 7);
